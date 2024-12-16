@@ -17,7 +17,7 @@ defmodule WriteTest do
     assert RomanNumbers.write(57) == "LVII"
   end
 
-  test "writes numbers with carry" do
+  test "writes numbers in subtractive form" do
     assert RomanNumbers.write(4) == "IV"
     assert RomanNumbers.write(49) == "XLIX"
   end

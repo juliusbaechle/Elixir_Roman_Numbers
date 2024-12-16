@@ -10,7 +10,9 @@
             "name": "mix run",
             "task": "run",
             "taskArgs": ["lib/roman_numbers.exs"],
-            "projectDir": "${workspaceRoot}"
+            "projectDir": "${workspaceRoot}",
+            "debugAutoInterpretAllModules": false,
+            "debugInterpretModulesPatterns": ["lib/roman_numbers.exs", "RomanNumbers*"]
         },
         {
             "type": "mix_task",

@@ -36,22 +36,20 @@ defmodule RomanNumbers do
     end
   end
 
-  def check_max_repetitions(list) do
-    check_max_repetitions(list, 1001, 0)
-  end
-  def check_max_repetitions([], _, _) do end
-  def check_max_repetitions([el | list], last, rep) do
+  defp check_max_repetitions(list, last \\ -1, rep \\ 1)
+  defp check_max_repetitions([], _, _) do end
+  defp check_max_repetitions([el | list], last, rep) do
     if last == el do
       is_base = Enum.member?(Map.keys(@d2r_base), el)
       check_max_repetitions(list, el, rep + 1)
       if not is_base do
-        raise "help or subtractive value repeated"
+        raise "repeated non-base value"
       end
-      if rep >= 2 do
-        raise "repeated more than three times"
+      if rep >= 3 do
+        raise "repeated base value more than three times"
       end
     else
-      check_max_repetitions(list, el, 0)
+      check_max_repetitions(list, el, 1)
     end
   end
 end

@@ -13,43 +13,16 @@ defmodule RomanNumbers do
     @d2r[el] <> write(num - el)
   end
 
-  def parse str do
-    l = to_list(str)
-    check_decreasing(l)
-    check_max_repetitions(l)
-    Enum.sum(l)
+  def parse(str) do
+    val = parse_i(str)
+    if write(val) != str, do: raise "invalid number format"
   end
 
-  def to_list("") do [] end
-  def to_list(str) do
+  defp parse_i(""), do: 0
+  defp parse_i(str) do
     is_sub = Enum.member?(Map.values(@d2r_sub), String.slice(str, 0..1))
     {el, str} = String.split_at(str, (if is_sub do 2 else 1 end))
-    if not Enum.member?(Map.keys(@r2d), el) do
-      raise "invalid character"
-    end
-    [@r2d[el]] ++ to_list(str)
-  end
-
-  def check_decreasing(l) do
-    if Enum.sort(l, &(&1 > &2)) != l do
-      raise "values increase"
-    end
-  end
-
-  defp check_max_repetitions(list, last \\ -1, rep \\ 1)
-  defp check_max_repetitions([], _, _) do end
-  defp check_max_repetitions([el | list], last, rep) do
-    if last == el do
-      is_base = Enum.member?(Map.keys(@d2r_base), el)
-      check_max_repetitions(list, el, rep + 1)
-      if not is_base do
-        raise "repeated non-base value"
-      end
-      if rep >= 3 do
-        raise "repeated base value more than three times"
-      end
-    else
-      check_max_repetitions(list, el, 1)
-    end
+    if not Enum.member?(Map.keys(@r2d), el), do: raise "invalid character"
+    @r2d[el] + parse_i(str)
   end
 end

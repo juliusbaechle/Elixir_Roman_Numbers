@@ -31,5 +31,7 @@ defmodule ParseTest do
     assert_raise RuntimeError, fn -> RomanNumbers.parse("IVIV") end
     assert_raise RuntimeError, fn -> RomanNumbers.parse("IIX") end
     assert_raise RuntimeError, fn -> RomanNumbers.parse("VV") end
+    assert_raise RuntimeError, fn -> RomanNumbers.parse("VIV") end
+    assert_raise RuntimeError, fn -> RomanNumbers.parse("IVI") end
   end
 end
